@@ -9,17 +9,17 @@ typedef int (*listener_func_t)(const char *port);
 
 // 2. Her protokole ait private listener fonksiyonları
 static int listen_tcp(const char *port) {
-	printf("TCP is not implemented yet");
+	printf("TCP is not implemented yet, setted port: %s", port);
 	return 0;
 }
 
 static int listen_udp(const char *port) {
-	printf("UDP is not implemented yet");
+	printf("UDP is not implemented yet, setted port: %s", port);
 	return 0;
 }
 
 static int listen_http(const char *port) {
-	printf("HTPP is not implemented yet");
+	printf("HTPP is not implemented yet, setted port: %s", port);
 	return 0;
 }
 

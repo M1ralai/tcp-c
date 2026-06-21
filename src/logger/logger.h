@@ -5,9 +5,9 @@
 extern "C" {
 #endif
 
-typedef struct hcb_error hcb_error_t;
+typedef struct hcb_logger hcb_logger_t;
 
-hcb_error_t *new_hcb_error();
+hcb_logger_t *new_hcb_logger();
 
 #ifdef __cplusplus
 }

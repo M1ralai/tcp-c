@@ -1,38 +1,34 @@
-# Derleyici ve Bayraklar
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -fPIC -O3 -std=c11
-INCLUDES = -I./include
+CFLAGS = -Wall -Wextra -std=c11 -Iinclude
+AR = ar rcs
 
-# Dosya İsimleri
-SRC = hcb_server.c
-OBJ = $(SRC:.c=.o)
-STATIC_LIB = libhcb_server.a
+SRC_DIR = src
+OBJ_DIR = obj
+BIN_DIR = bin
 
-# İşletim sistemine göre dinamik kütüphane uzantısını belirleme
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-    SHARED_LIB = libhcb_server.dylib
-else
-    SHARED_LIB = libhcb_server.so
-endif
+NAME = libhcb_server.a
 
-# Varsayılan hedef (Sadece 'make' yazıldığında çalışır)
-all: $(STATIC_LIB) $(SHARED_LIB)
+SRCS = $(shell find $(SRC_DIR) -name "*.c")
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-# Object dosyalarını derleme
-%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+all: $(BIN_DIR)/$(NAME)
 
-# Statik kütüphane oluşturma
-$(STATIC_LIB): $(OBJ)
-	ar rcs $@ $^
+# static library output
+$(BIN_DIR)/$(NAME): $(OBJS)
+	@mkdir -p $(BIN_DIR)
+	$(AR) $@ $^
 
-# Dinamik kütüphane oluşturma
-$(SHARED_LIB): $(OBJ)
-	$(CC) -shared -o $@ $^
+# compile rule (mirrors folder structure)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Temizlik komutu ('make clean')
 clean:
-	rm -f *.o *.a *.so *.dylib
+	rm -rf $(OBJ_DIR)
 
-.PHONY: all clean
+fclean: clean
+	rm -rf $(BIN_DIR)
+
+re: fclean all
+
+.PHONY: all clean fclean re

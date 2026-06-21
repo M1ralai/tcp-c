@@ -1,0 +1,51 @@
+---
+Language: Cpp
+# Temel şablonumuz LLVM ama onu baştan aşağı Go'ya çeviriyoruz
+BasedOnStyle: LLVM
+
+# 1. GO STİLİ PARANTEZLER (Her şey aynı satırda açılır, fonksiyonlar dahil!)
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterObjCDeclaration: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+
+# 2. SAF GO GİRİNTİLERİ (Go asla space kullanmaz, her şey temiz Tab'dır)
+UseTab: Always
+TabWidth: 4
+IndentWidth: 4
+
+# 3. SENİN NEFES ALAN BLOKLARIN (Bıraktığın boşluklar asla silinmez)
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 1
+
+# 4. GO STİLİ SWITCH-CASE (Case'ler switch ile aynı hizada başlar)
+IndentCaseLabels: false
+
+# 5. POINTER HİZALAMASI (Go'daki gibi tipe değil, isme bitişik: int *x)
+PointerAlignment: Right
+
+# 6. TEK SATIRLIK KOD YASAĞI (Go'nun netliği: Tek satır if/for yasak, blok zorunlu)
+AllowShortBlocksOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# 7. EKRAN VE SUNUM OPTİMİZASYONU (Geniş ekranlarda ve videolarda kodun kırılmaması için)
+ColumnLimit: 120
+...

@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define ERROR_MESSAGE_SIZE 64
-
 struct hcb_error {
 	const char *module;
 	char msg[ERROR_MESSAGE_SIZE];

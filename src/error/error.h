@@ -1,6 +1,8 @@
 #ifndef HCB_SERVER_ERROR
 #define HCB_SERVER_ERROR
 
+#define ERROR_MESSAGE_SIZE 128
+
 #ifdef __cplusplus
 extern "C" {
 #endif

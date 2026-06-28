@@ -5,15 +5,18 @@
 extern "C" {
 #endif
 
-typedef enum { HCB_PROTOCOL_TCP, HCP_PROTOCOL_UDP, HCP_PROTOCOL_HTTP, HCP_PROTOCOL_MAX } hcb_protocol_t;
+#include "../error/error.h"
+#include "../io/socket.h"
 
 typedef struct hcb_server hcb_server_t;
 
-hcb_server_t *new_hcb_server(const char *port, hcb_protocol_t protocol);
+hcb_server_t *hcb_new_server(hcb_socket_t *port);
 
-int hcb_server_start(hcb_server_t *server);
+void hcb_server_start(hcb_server_t *server, int debug_err);
 
-void hcb_server_destroy(hcb_server_t *server);
+hcb_server_t *hcb_server_free(hcb_server_t *server);
+
+hcb_error_t *hcb_server_get_error(hcb_server_t *server);
 
 #ifdef __cplusplus
 }

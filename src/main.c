@@ -9,12 +9,15 @@
 #include <unistd.h>
 
 #include "error/error.h"
+#include "io/socket.h"
+#include "server/server.h"
 
 int main() {
-	hcb_error_t *err = new_hcb_error("SERVER");
-	hcb_error_set(err, "SERVER basarili sekilde baslatildi ve kapatiliyor");
-	printf("%s", hcb_error_formatted_get(err));
-	err = hcb_error_free(err);
+	hcb_server_t *server = hcb_new_server(hcb_new_socket());
+	hcb_server_start(server, 1);
+	if (hcb_error_get_is_error(hcb_server_get_error(server))) {
+		printf("%s", hcb_error_formatted_get(hcb_server_get_error(server)));
+	}
 }
 
 /*

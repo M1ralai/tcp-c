@@ -6,9 +6,10 @@
 struct hcb_error {
 	const char *module;
 	char msg[ERROR_MESSAGE_SIZE];
+	int is_error;
 };
 
-hcb_error_t *new_hcb_error(const char *module) {
+hcb_error_t *hcb_new_error(const char *module) {
 	struct hcb_error *ret;
 	ret = malloc(sizeof(*ret));
 	if (ret == NULL) {
@@ -16,11 +17,13 @@ hcb_error_t *new_hcb_error(const char *module) {
 		return NULL;
 	}
 	ret->module = module;
+	ret->is_error = 0;
 	return ret;
 }
 
 void hcb_error_set(hcb_error_t *err, const char *msg) {
 	strncpy(err->msg, msg, ERROR_MESSAGE_SIZE - 1);
+	err->is_error = 1;
 }
 
 const char *hcb_error_formatted_get(hcb_error_t *err) {
@@ -35,4 +38,8 @@ hcb_error_t *hcb_error_free(hcb_error_t *err) {
 		free(err);
 	}
 	return NULL;
+}
+
+int hcb_error_get_is_error(hcb_error_t *err) {
+	return err->is_error;
 }

@@ -10,14 +10,17 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "../error/error.h"
+
 struct hcb_socket {
 	int socket_fd;
 	hcb_error_t *err;
 };
 
-hcb_socket_t *hcb_new_socket(hcb_error_t *err) {
+hcb_socket_t *hcb_new_socket() {
 	hcb_socket_t *ret;
 	ret = malloc(sizeof(*ret));
+	hcb_error_t *err = hcb_new_error("Socket");
 	ret->err = err;
 	ret->socket_fd = -1;
 	return ret;
